@@ -1,0 +1,114 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
+
+:root {
+ --font: 'Montserrat', sans-serif;
+ --zero: 0;
+ --rel: relative;
+ --abs: absolute;
+}
+
+body {
+    font-family: var(--font);
+    text-transform: uppercase;
+    -webkit-user-select: none; /* Safari */
+    -ms-user-select: none; /* IE 10 and IE 11 */
+    user-select: none; /* Standard syntax */
+    overflow: hidden;
+}
+
+.idcard {
+    position: var(--abs);
+    height: 272px;
+    width: 457px;
+    top: 250px;
+    border-radius: 2vh;
+    display: none;
+    background-repeat: no-repeat;
+    background-size:cover;
+    background-position: center;
+    background-image: url('./assets/img/prescription_card.png')
+}
+
+.idcard .header {
+    text-align: center;
+    font-size: 2vh;
+    font-weight: 600;
+    width: 50vh;
+}
+
+.idcard .header img{
+    width: 6vh;
+    margin-left: -1vh;
+}
+
+.idcard .header span:first-of-type{
+    position: var(--rel);
+    top: -2vh;
+    left: -3vh;
+}
+
+.idcard .header span{
+    position: var(--rel);
+    top: -2vh;
+    left: 2vh;
+}
+
+.idcard .content {
+    margin-top: 50px;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.idcard .title {
+    font-weight: bold;
+}
+
+ul {
+    list-style-type: none;
+}
+
+.idcard .reciever {
+    min-width: 50%;
+}
+
+.idcard .text ul li {
+    margin: 0.3vh;
+    list-style-type: none;
+    font-size: 1vh;
+    text-align: right;
+    font-weight: 900;
+    border-bottom: 0.1vh solid #00000012;
+}
+
+.idcard .text ul span.info {
+    font-size: 1vh;
+    font-weight: 800;
+    padding: 2vh;
+}
+
+.slide-in {
+    animation: slide-in 0.5s forwards;
+}
+
+.slide-out {
+    animation: slide-out 0.6s forwards;
+}
+
+@keyframes slide-in {
+    0% {
+        right: 8vh;
+    }
+    100% {
+        right: 3vh;
+    }
+}
+
+@keyframes slide-out {
+    0% {
+        right: 3vh;
+    }
+    100% {
+        right: 8vh;
+    }
+}
