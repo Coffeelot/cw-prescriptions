@@ -23,9 +23,9 @@ local function createPrescriptionCard(source, data)
     -- info.amount = data.amount
     info.giverName = data.giverName
     info.notes = data.notes
-    
+
     addItem(src, Config.Items['prescription_card'].value, 1, info)
-    Player.Functions.RemoveMoney("debit", data.amount*Config.Cost)
+    Player.Functions.RemoveMoney("debit", data.amount*Config.Cost, "Created Prescription Card")
 end
 
 for i, type in pairs(Config.Items) do
