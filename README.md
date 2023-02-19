@@ -15,7 +15,7 @@ Allows creation of presciption cars that can be personalized. The idea is for EM
 
 [![Buy Us a Coffee](https://www.buymeacoffee.com/assets/img/guidelines/download-assets-sm-2.svg)](https://www.buymeacoffee.com/cwscriptbois )
 # Config 🔧
-You can add more card types in `Config.Items` in the config file. Follow the model. 
+You can add more card types in `Config.Items` in the config file. Follow the model. By default, the spot is set up in the lab of Gabz Pillbox, and can only be used by any ems or a police officer with rank 4 or higher.
 
 # Add to qb-core ❗
 ```

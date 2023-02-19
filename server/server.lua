@@ -5,6 +5,7 @@ local function addItem(source, item, amount, info)
     if Config.Inventory == 'ox' then
         exports.ox_inventory:AddItem(src, item, amount, info)
     else
+        local Player = QBCore.Functions.GetPlayer(source)
 		Player.Functions.AddItem(item, amount, nil, info)
         TriggerClientEvent('inventory:client:ItemBox', source, QBCore.Shared.Items[item], "add")
     end
