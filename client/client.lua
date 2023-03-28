@@ -1,7 +1,7 @@
 local QBCore = exports['qb-core']:GetCoreObject()
 local openid = false
 
-if Config.Inventory == 'ox' then 
+if Config.Inventory == 'ox' then
     AddEventHandler('QBCore:Client:OnPlayerLoaded', function()
         exports.ox_inventory:displayMetadata('holderName', 'Holder')
         exports.ox_inventory:displayMetadata('citizenId', 'Citizen ID')
@@ -23,7 +23,9 @@ RegisterNetEvent("cw-prescriptions:client:openPrescriptionCard", function(data, 
         else
             info = data.info
         end
-        print(QBCore.Debug(data))
+        if useDebug then
+            print(QBCore.Debug(data))
+        end
         SetNuiFocusKeepInput(true)
         SetNuiFocus(true,false)
         SendNUIMessage({nui = 'cwpres', information = info})
@@ -90,7 +92,14 @@ CreateThread(function()
                         type = "client",
                         icon = "fas fa-prescription-bottle-alt",
                         event = "cw-prescriptions:client:openInteraction",
-                        label = "Write prescription",
+                        label = "Write Prescription",
+                        canInteract = function() return isAllowed('print') end
+                    },
+                    {
+                        type = "client",
+                        icon = "fas fa-tag",
+                        event = "cw-prescriptions:client:openLabelInteraction",
+                        label = "Add Label To Drugs",
                         canInteract = function() return isAllowed('print') end
                     },
                 },
@@ -121,10 +130,45 @@ CreateThread(function()
                         label = "Write prescription",
                         canInteract = function() return isAllowed('print') end
                     },
+                    {
+                        type = "client",
+                        icon = "fas fa-prescription-bottle-alt",
+                        event = "cw-prescriptions:client:openLabelInteraction",
+                        label = "Add Label To Drugs",
+                        canInteract = function() return isAllowed('print') end
+                    },
                 },
                 distance = 2.0
             })
         end
+    end
+end)
+
+RegisterNetEvent("cw-prescriptions:client:openLabelInteraction", function()
+    local dialog = exports['qb-input']:ShowInput({
+        header = Config.Texts.labelMakerHeaer,
+        submitText = Config.Texts.labelMakerSubmit,
+        inputs = Config.LabelInputs,
+    })
+    if dialog ~= nil then
+        local year, month, day = GetUtcTime()
+
+        local data = {
+            recieverName = dialog.recieverName,
+            citizenId = dialog.citizenId,
+            fromDate = tostring(month)..'/'..tostring(day)..'/'..tostring(year),
+            giverName = dialog.giverName,
+            notes = dialog.notes,
+            drug = dialog.drug,
+            item = dialog.item,
+        }
+        if QBCore.Functions.HasItem(data.item) then
+            TriggerServerEvent("cw-prescriptions:server:addLabel", data)
+        else
+            QBCore.Functions.Notify("You don't the bottle on you", "error")
+        end
+    else
+        QBCore.Functions.Notify("Bad input", "error")
     end
 end)
 
@@ -137,7 +181,7 @@ RegisterNetEvent("cw-prescriptions:client:openInteraction", function()
     if dialog ~= nil then
         local year, month, day = GetUtcTime()
 
-        local data = { 
+        local data = {
             recieverName = dialog.recieverName,
             citizenId = dialog.citizenId,
             toDate = dialog.toDate,

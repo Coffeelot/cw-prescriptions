@@ -25,7 +25,9 @@ Config.PrinterSpawns = {
 -- General Setup
 Config.Texts = {
     cardMakerHeader = "Presciption Card Maker ELITE edition (©2001)",
-    cardMakerSubmit = "Create"
+    cardMakerSubmit = "Create",
+    labelMakerHeaer = "Label Printer DELUXE (©1992)",
+    labelMakerSubmit = "Print"
 }
 
 Config.Items = {
@@ -75,4 +77,50 @@ Config.Inputs = {
         type = "text", -- type of the input - number will not allow non-number characters in the field so only accepts 0-9
         isRequired = true, -- Optional [accepted values: true | false] but will submit the form if no value is inputted
     }
+}
+
+local bottles = {
+    {   value = 'painkillers', name = 'painkillers', text = 'Painkillers' },
+    {   value = 'oxy', name = 'oxy', text = 'Oxycotin' },
+    {   value = 'adderall', name = 'adderall', text = 'Adderall' },
+    {   value = 'pill_bottle', name = 'pill_bottle', text = 'Pill Bottle' },
+}
+
+Config.LabelInputs = {
+    {
+        text = "Name on card", -- text you want to be displayed as a place holder
+        name = "recieverName", -- name of the input should be unique otherwise it might override
+        type = "text", -- type of the input
+        isRequired = true, -- Optional [accepted values: true | false] but will submit the form if no value is inputted
+    },
+    {
+        text = "Citizen Id", -- text you want to be displayed as a place holder
+        name = "citizenId", -- name of the input should be unique otherwise it might override
+        type = "text", -- type of the input
+        isRequired = true, -- Optional [accepted values: true | false] but will submit the form if no value is inputted
+    },
+    {
+        text = "Bottle",
+        name = "item",
+        type = "select",
+        options = bottles
+    },
+    {
+        text = "Drug (if applicable)",
+        name = "drug",
+        type = "text"
+    },
+    {
+        text = "Signed by", -- text you want to be displayed as a place holder
+        name = "giverName", -- name of the input should be unique otherwise it might override
+        type = "text", -- type of the input - number will not allow non-number characters in the field so only accepts 0-9
+        isRequired = true, -- Optional [accepted values: true | false] but will submit the form if no value is inputted
+    },
+    {
+        text = "Notes", -- text you want to be displayed as a place holder
+        name = "notes", -- name of the input should be unique otherwise it might override
+        type = "text", -- type of the input - number will not allow non-number characters in the field so only accepts 0-9
+        isRequired = true, -- Optional [accepted values: true | false] but will submit the form if no value is inputted
+    }
+
 }
